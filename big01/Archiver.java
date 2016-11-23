@@ -4,27 +4,26 @@ import com.javarush.test.level31.lesson15.big01.exception.WrongZipFileException;
 
 import java.io.IOException;
 
-/**
- * Created by root on 11/22/2016.
- */
 public class Archiver {
-    public static void main(String[] args) throws Exception {
-        Operation operation = null;
+    public static void main(String[] args) throws IOException {
 
+        Operation operation = null;
         do {
             try {
                 operation = askOperation();
                 CommandExecutor.execute(operation);
-            } catch (WrongZipFileException wzfe) {
+            } catch (WrongZipFileException e) {
                 ConsoleHelper.writeMessage("Вы не выбрали файл архива или выбрали неверный файл.");
             } catch (Exception e) {
                 ConsoleHelper.writeMessage("Произошла ошибка. Проверьте введенные данные.");
             }
-        } while (!operation.equals(Operation.EXIT));
 
-
+        } while (operation != Operation.EXIT);
     }
-    public static Operation askOperation() throws IOException{
+
+
+    public static Operation askOperation() throws IOException {
+        ConsoleHelper.writeMessage("");
         ConsoleHelper.writeMessage("Выберите операцию:");
         ConsoleHelper.writeMessage(String.format("\t %d - упаковать файлы в архив", Operation.CREATE.ordinal()));
         ConsoleHelper.writeMessage(String.format("\t %d - добавить файл в архив", Operation.ADD.ordinal()));
