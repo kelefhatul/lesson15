@@ -7,25 +7,22 @@ import com.javarush.test.level31.lesson15.big01.exception.PathIsNotFoundExceptio
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * Created by root on 11/23/2016.
- */
 public class ZipExtractCommand extends ZipCommand {
     @Override
     public void execute() throws Exception {
         try {
-            ConsoleHelper.writeMessage("Extracting archive.");
+            ConsoleHelper.writeMessage("Распаковка архива.");
 
             ZipFileManager zipFileManager = getZipFileManager();
 
-            ConsoleHelper.writeMessage("Input full filename or directories for extracting (destination):");
-            Path destination = Paths.get(ConsoleHelper.readString());
-            zipFileManager.extractAll(destination);
+            ConsoleHelper.writeMessage("Введите путь для распаковки:");
+            Path destinationPath = Paths.get(ConsoleHelper.readString());
+            zipFileManager.extractAll(destinationPath);
 
-            ConsoleHelper.writeMessage("Archive extracted");
+            ConsoleHelper.writeMessage("Архив был распакован.");
 
         } catch (PathIsNotFoundException e) {
-            ConsoleHelper.writeMessage("Вы неверно указали имя файла или директории.");
+            ConsoleHelper.writeMessage("Неверный путь для распаковки.");
         }
     }
 }
